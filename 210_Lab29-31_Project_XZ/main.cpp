@@ -7,12 +7,14 @@
 
 //  Include necessary headers for file handling, data structures, etc.
 
+//Define a struct to store three lists for vehicles
+
 // Define a function to simulate traffic flow for one hour
     // Parameters: intersections map, current hour
    
 
 // Main function
-    // Initialize map to instore the intersections with the keys of the name (like "Main & 1st" or "North & 5th"), also initializing the lists for cars, buses, and bikes
+    // Initialize map to instore the intersections with the keys of the name (like "Main & 1st" or "North & 5th")
 
     // Open an external file to load initial traffic data (including the name of the intersections, and the list of the vehicles)
         // If file cannot be opened, display an error and exit
