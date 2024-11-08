@@ -4,6 +4,7 @@
 //
 //  Created by Xiao Zhang on 11/5/24.
 //
+//This is the code of my Alpha Release.
 
 //  Include necessary headers for file handling, data structures, etc.
 #include <iostream>
@@ -11,6 +12,7 @@
 #include <list>
 #include <cstdlib>
 #include <ctime>
+#include <fstream>
 
 using namespace std;
 //Define a struct to store three lists for vehicles
@@ -28,20 +30,36 @@ int main() {
     srand(static_cast<unsigned int>(time(0)));
     // Initialize map to instore the intersections with the keys of the name (like "Main & 1st" or "North & 5th")
     map<string, Intersection> intersections;
-        intersections["Main & 1st"].cars.push_back("Car_0");
-        intersections["North & 5th"].buses.push_back("Bus_0");
     // Open an external file to load initial traffic data (including the name of the intersections, and the list of the vehicles)
+
+    string filename;
+    cout<<"What's the name of the file you want to use: "<<endl;
+    cin>>filename;
+    ifstream file(filename);
     // If file cannot be opened, display an error and exit
-    
+    if(!file.is_open()){
+        cout<<"File can't be opened!!!";
+        return 1;
+    }
     // Read and parse data from the file to fill the intersections map and the list
+    string intersectionName, vehicleType;
     
+    while (file >> intersectionName >> vehicleType) {
+        if (vehicleType == "Car") {
+            intersections[intersectionName].cars.push_back(vehicleType);
+        } else if (vehicleType == "Bus") {
+            intersections[intersectionName].buses.push_back(vehicleType);
+        } else if (vehicleType == "Bike") {
+            intersections[intersectionName].bikes.push_back(vehicleType);
+        }
+    }
+
     // Close the file
-    
+        file.close();
     // Loop through time periods (24 hours)
-    
-    // For each hour, call the simulate traffic function
     for (int hour = 1; hour <= 24; ++hour) {
-            simulate(intersections, hour);
+    // For each hour, call the simulate traffic function
+        simulate(intersections, hour);
         }
 
     return 0;
@@ -59,10 +77,10 @@ void stimulate(map<string, Intersection>& intersections, int hour) {
         bool flag = rand() % 2;
         // If yes, generate the name of the accident or what happened to the traffic light, and then print it out.
         if (flag) {
-            cout << "Event: ";
+            cout << "Event Happens: ";
             int eventType = rand() % 3;
             if (eventType == 0) {
-                cout << "Traffic light malfunction!\n";
+                cout << "Traffic light change!\n";
             } else if (eventType == 1) {
                 cout << "Accident involving a car!\n";
             } else {
