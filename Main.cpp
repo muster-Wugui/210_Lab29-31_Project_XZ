@@ -1,4 +1,4 @@
-//
+// COMSC-210 | Lab 30 | Xiao Zhang
 //  main.cpp
 //  210_Lab29-31_Project_XZ
 //
@@ -69,7 +69,7 @@ int main() {
 //Definition of the function
 void stimulate(map<string, Intersection>& intersections, int hour) {
     //Get the intersections map and current hour
-    cout << "Hour: " << hour << "\n";
+    cout << "Current Hour: " << hour << "\n";
     for (auto& [name, intersection] : intersections) {
         cout << "Intersection: " << name << "\n";
         // For each intersection:
@@ -88,7 +88,14 @@ void stimulate(map<string, Intersection>& intersections, int hour) {
             }
             // apply randomly choose a kind of vehicle that the traffic delays (cars, buses, or bikes)
             int vehicleType = rand() % 3;
-            string delayedVehicle = (vehicleType == 0) ? "cars" : (vehicleType == 1) ? "buses" : "bikes";
+            string delayedVehicle;
+            if (vehicleType == 0){
+                delayedVehicle = "cars";
+            } else if (vehicleType == 1){
+                 delayedVehicle = "buses";
+            }else{
+                delayedVehicle = "bikes";
+            }
             cout << "Delaying " << delayedVehicle << "\n";
         }
         // If no, print out nothing happened
@@ -96,18 +103,53 @@ void stimulate(map<string, Intersection>& intersections, int hour) {
                     cout << "No incidents this hour.\n";
                 }
         //randomly add or remove vehicles from each list
-        int carChange = rand() % 5 - 2;;
-        int busChange = rand() % 3 - 1;;
-        int bikeChange = rand() % 5 - 2; //I only use car changes to disply here
+        int carChange = rand() % 5 - 2;
         
+        int busChange = rand() % 3 - 1;
+        
+        int bikeChange = rand() % 5 - 2; 
+
         for (int i = 0; i < abs(carChange); ++i) {
-                    if (carChange > 0) {
-                        intersection.cars.push_back("Car");
-                    } else if (!intersection.cars.empty()) {
-                        intersection.cars.pop_front();
-                    }
-                }
-                cout << abs(carChange) << " cars " << (carChange > 0 ? "joined" : "passed through") << ". Cars now: " << intersection.cars.size() << "\n";
+            if (carChange > 0) {
+                intersection.cars.push_back("Car");
+            } else if (!intersection.cars.empty()) {
+                intersection.cars.pop_front();
+        }
+
+        cout << abs(carChange) << "Cars";
+        if (carChange > 0) {
+            cout << "joined";
+        } else {
+            cout << "passed through";
+        }
+
+        for (int i = 0; i < abs(busChange); ++i) {
+            if (busChange > 0) {
+                intersection.buses.push_back("Bus");
+            } else if (!intersection.buses.empty()) {
+                intersection.buses.pop_front();
+        }
+            
+        cout << abs(busChange) << " Buses ";
+        if (busChange > 0) {
+            cout << "joined";
+        } else {
+            cout << "passed through";
+        }
+            
+        for (int i = 0; i < abs(bikeChange); ++i) {
+            if (bikeChange > 0) {
+                intersection.bikes.push_back("Bikes");
+            } else if (!intersection.bikes.empty()) {
+                intersection.bikes.pop_front();
+        }
+
+        cout << abs(busChange) << " Buses ";
+        if (busChange > 0) {
+            cout << "joined";
+        } else {
+            cout << "passed through";
+        }
 
         // Print the traffic changes for this hour, for example {numbers} of {kind} passed through or joint the line, and print our how many vehicles are at the intersections
         cout << "Remaining vehicles at " << name << ": \n"<< "Cars: " << intersection.cars.size() << "\n"<< "Buses: " << intersection.buses.size() << "\n"<< "Bikes: " << intersection.bikes.size() << "\n";cout << "------------------------\n";
