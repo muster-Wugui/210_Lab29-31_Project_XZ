@@ -69,9 +69,13 @@ int main() {
 
 //Definition of the function
 void stimulate(map<string, Intersection>& intersections, int hour) {
+    
+    
     //Get the intersections map and current hour
     cout << "\n\nCurrent Hour: " << hour << "\n";
     for (auto& [name, intersection] : intersections) {
+        int vehicleType = -1;
+        string delayedVehicle;
         cout << "Intersection: " << name << "\n";
         // For each intersection:
         // Randomly decide if an event (like an accident or traffic light malfunction) occurs
@@ -88,8 +92,7 @@ void stimulate(map<string, Intersection>& intersections, int hour) {
                 cout << "Roadblock caused by a bus breakdown!\n";
             }
             // apply randomly choose a kind of vehicle that the traffic delays (cars, buses, or bikes)
-            int vehicleType = rand() % 3;
-            string delayedVehicle;
+            vehicleType = rand() % 3;
             if (vehicleType == 0){
                 delayedVehicle = "cars";
             } else if (vehicleType == 1){
@@ -111,7 +114,11 @@ void stimulate(map<string, Intersection>& intersections, int hour) {
         int bikeChange = rand() % 5 - 2; 
 
         for (int i = 0; i < abs(carChange); ++i) {
-            if (carChange > 0) {
+            if(delayedVehicle == "cars"){
+                i = 100;
+                carChange = 0;
+                break;
+            }else if (carChange > 0) {
                 intersection.cars.push_back("Car");
             } else if (!intersection.cars.empty()) {
                 intersection.cars.pop_front();
@@ -126,8 +133,12 @@ void stimulate(map<string, Intersection>& intersections, int hour) {
         }
 
         for (int i = 0; i < abs(busChange); ++i) {
-            if (busChange > 0) {
-                intersection.buses.push_back("Bus");
+            if(delayedVehicle == "buses"){
+                i = 100;
+                busChange = 0;
+                break;
+            }else if (busChange > 0) {
+                intersection.buses.push_back("Car");
             } else if (!intersection.buses.empty()) {
                 intersection.buses.pop_front();
             }
@@ -136,13 +147,17 @@ void stimulate(map<string, Intersection>& intersections, int hour) {
         cout << abs(busChange) << " Buses ";
         if (busChange > 0) {
             cout << "joined"<<endl;
-        } else {
+        } else{
             cout << "passed through"<<endl;
         }
             
         for (int i = 0; i < abs(bikeChange); ++i) {
-            if (bikeChange > 0) {
-                intersection.bikes.push_back("Bikes");
+            if(delayedVehicle == "bikes"){
+                i = 100;
+                bikeChange = 0;
+                break;
+            }else if (bikeChange > 0) {
+                intersection.bikes.push_back("Car");
             } else if (!intersection.bikes.empty()) {
                 intersection.bikes.pop_front();
             }
