@@ -13,6 +13,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <fstream>
+#include <cmath>
 
 using namespace std;
 //Define a struct to store three lists for vehicles
@@ -23,7 +24,7 @@ struct Intersection {
 };
 // Define a function to simulate traffic flow for one hour
     // Parameters: intersections map, current hour
-void simulate(map<string, Intersection>& intersections, int hour);
+void stimulate(map<string, Intersection>& intersections, int hour);
 
 // Main function
 int main() {
@@ -59,7 +60,7 @@ int main() {
     // Loop through time periods (24 hours)
     for (int hour = 1; hour <= 24; ++hour) {
     // For each hour, call the simulate traffic function
-        simulate(intersections, hour);
+        stimulate(intersections, hour);
         }
 
     return 0;
@@ -69,7 +70,7 @@ int main() {
 //Definition of the function
 void stimulate(map<string, Intersection>& intersections, int hour) {
     //Get the intersections map and current hour
-    cout << "Current Hour: " << hour << "\n";
+    cout << "\n\nCurrent Hour: " << hour << "\n";
     for (auto& [name, intersection] : intersections) {
         cout << "Intersection: " << name << "\n";
         // For each intersection:
@@ -114,13 +115,14 @@ void stimulate(map<string, Intersection>& intersections, int hour) {
                 intersection.cars.push_back("Car");
             } else if (!intersection.cars.empty()) {
                 intersection.cars.pop_front();
+            }
         }
 
-        cout << abs(carChange) << "Cars";
+        cout << abs(carChange) << " Cars ";
         if (carChange > 0) {
-            cout << "joined";
+            cout << "joined"<<endl;
         } else {
-            cout << "passed through";
+            cout << "passed through"<<endl;
         }
 
         for (int i = 0; i < abs(busChange); ++i) {
@@ -128,13 +130,14 @@ void stimulate(map<string, Intersection>& intersections, int hour) {
                 intersection.buses.push_back("Bus");
             } else if (!intersection.buses.empty()) {
                 intersection.buses.pop_front();
+            }
         }
             
         cout << abs(busChange) << " Buses ";
         if (busChange > 0) {
-            cout << "joined";
+            cout << "joined"<<endl;
         } else {
-            cout << "passed through";
+            cout << "passed through"<<endl;
         }
             
         for (int i = 0; i < abs(bikeChange); ++i) {
@@ -142,13 +145,14 @@ void stimulate(map<string, Intersection>& intersections, int hour) {
                 intersection.bikes.push_back("Bikes");
             } else if (!intersection.bikes.empty()) {
                 intersection.bikes.pop_front();
+            }
         }
 
-        cout << abs(busChange) << " Buses ";
-        if (busChange > 0) {
-            cout << "joined";
+        cout << abs(bikeChange) << " Bikes ";
+        if (bikeChange > 0) {
+            cout << "joined"<<endl;
         } else {
-            cout << "passed through";
+            cout << "passed through"<<endl;
         }
 
         // Print the traffic changes for this hour, for example {numbers} of {kind} passed through or joint the line, and print our how many vehicles are at the intersections
