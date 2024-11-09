@@ -1,0 +1,51 @@
+For my Unit test, I will test the stimulate function to make sure it's working properly. And here's some specific areas and aspects that I need to take a look at:
+1.Making sure the parameter map is being processed properly.
+2.Checking that the function can add and remove different vehicles from each intersection's list.
+3.Making sure that the random events are tiggered sometimes and processes correctly.
+4.Making sure that the delayed vehicle won't pass through the intersection.
+5.Making sure that vehicle counts are updated proerply each time a vehicle is added or removed.
+
+And this is my driver program:
+#include <iostream>
+#include <map>
+#include <list>
+#include <cstdlib>
+#include <ctime>
+#include <fstream>
+#include <cmath>
+
+using namespace std;
+
+struct Intersection {
+    list<string> cars;
+    list<string> buses;
+    list<string> bikes;
+};
+
+// The function I'm testing
+void simulate(map<string, Intersection>& intersections, int hour);
+
+int main() {
+    srand(static_cast<unsigned int>(time(0)));
+
+    // Set up an example intersection with some initial vehicles
+    map<string, Intersection> intersections;
+    intersections["Main & 1st"].cars = {"Car", "Car"};
+    intersections["North & 5th"].buses = {"Bus"};
+    intersections["2nd & 1st"].bikes = {"Bike", "Bike", "Bike"};
+
+    // Run the simulate function for a few hours and check results
+    cout << "Testing the simulate function:\n";
+    for (int hour = 1; hour <= 3; ++hour) {
+        simulate(intersections, hour);
+
+        // Output the results for each hour
+        cout << "\nAfter hour " << hour << ":\n";
+        cout << "Cars: " << intersections["Main & 1st"].cars.size() << endl;
+        cout << "Buses: " << intersections["Main & 1st"].buses.size() << endl;
+        cout << "Bikes: " << intersections["Main & 1st"].bikes.size() << endl;
+        cout << "-----------------------------\n";
+    }
+
+    return 0;
+}
