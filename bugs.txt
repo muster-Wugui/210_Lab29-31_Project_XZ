@@ -1,0 +1,39 @@
+Bug #1: Couldn't open the file.
+Fix: Added a check to see if the file opens, and if it doesn't, it now shows an error message.
+Notes: Make sure the file path is right before testing so it actually works.
+
+Bug #2: Random vehicle type was going into the wrong list (like putting "Bus" in with "Bikes").
+Fix: Fixed the if-else conditions to ensure each vehicle type ends up in the correct list.
+Notes: Double-check if-else conditions to avoid mix-ups when loading data.
+
+Bug #3: Delayed vehicle type was still getting updated during a delay event.
+Fix: Added a break so that delayed vehicles don’t get modified.
+Notes: This keeps vehicles on hold without any unintended changes.
+
+Bug #4: Bike count was showing up wrong.
+Fix: Adjusted the code to track bikes properly according to bikeChange values.
+Notes: Keep an eye on how counts change to make sure they’re accurate in the output.
+
+Bug #5: Negative vehicle counts were showing when trying to remove vehicles from an empty list.
+Fix: Added a check to stop removal from an empty list, so counts stay accurate.
+Notes: Handle list operations carefully to avoid negative counts.
+
+Bug #6: Event description didn’t update for each intersection in the loop.
+Fix: Reset the event description each time to keep them unique.
+Notes: Reset variables in loops to avoid reusing the same description.
+
+Bug #7: Incorrect vehicle type in updateList lambda caused mismatches.
+Fix: Updated type in the lambda to match the main vehicle list.
+Notes: Double-check data types in lambdas to avoid mismatches.
+
+Bug #8: Delayed vehicle message wasn’t showing up right.
+Fix: Fixed the delayedVehicle format in simulateTraffic so it displays correctly.
+Notes: Review output format to make sure messages look right.
+
+Bug #9: Event flag wasn’t resetting, so events repeated across intersections.
+Fix: Moved event flag reset so it refreshes each time.
+Notes: Initialize flags in each loop to avoid leftover values.
+
+Bug #10: Wrong vehicle type was showing in delay messages.
+Fix: Cleared up assignments for vehicle types in delay messages.
+Notes: Check random selection logic to make sure it’s picking the right type.

@@ -34,12 +34,12 @@ int main() {
     // Open an external file to load initial traffic data (including the name of the intersections, and the list of the vehicles)
 
     string filename;
-    cout<<"What's the name of the file you want to use: "<<endl;
+    cout<<"Enter the file name to load traffic data: "<<endl;
     cin>>filename;
     ifstream file(filename);
     // If file cannot be opened, display an error and exit
-    if(!file.is_open()){
-        cout<<"File can't be opened!!!";
+     if (!file.is_open()) {
+        cout << "Error: Could not open file." << endl;
         return 1;
     }
     // Read and parse data from the file to fill the intersections map and the list
